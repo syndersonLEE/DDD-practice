@@ -1,7 +1,6 @@
 package sangyun.dddpractice.domian;
 
 import java.util.List;
-import sangyun.dddpractice.domian.OrderState;
 
 public class Order {
 	private List<OrderLine> orderLines;

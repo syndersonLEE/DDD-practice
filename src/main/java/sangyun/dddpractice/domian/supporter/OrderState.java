@@ -1,4 +1,4 @@
-package sangyun.dddpractice.domian;
+package sangyun.dddpractice.domian.supporter;
 
 public enum OrderState {
 	PAYMENT_WAITING,
@@ -7,5 +7,4 @@ public enum OrderState {
 	DELIVERING,
 	DELIVERY_COMPLETE,
 	CANCELED;
-
 }

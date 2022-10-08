@@ -2,22 +2,22 @@ package sangyun.dddpractice.domian;
 
 public class OrderLine {
 	private String product;
-	private int price;
+	private Money price;
 	private int quantity;
-	private int amounts;
+	private Money amounts;
 
-	public OrderLine(String product, int price, int quantity, int amounts) {
+	public OrderLine(String product, Money price, int quantity, Money amounts) {
 		this.product = product;
-		this.price = price;
+		this.price = new Money(price.getValue());
 		this.quantity = quantity;
-		this.amounts = amounts;
+		this.amounts = calculateAmounts();
 	}
 
-	private int calculateAmounts() {
-		return price * quantity;
+	private Money calculateAmounts() {
+		return new Money( price.getValue() * quantity);
 	}
 
 	public int getAmounts() {
-		return amounts;
+		return amounts.getValue();
 	}
 }

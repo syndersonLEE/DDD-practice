@@ -1,5 +1,7 @@
 package sangyun.dddpractice.domian;
 
+import jakarta.persistence.Entity;
+
 public class Address {
 	private String address1;
 	private String address2;

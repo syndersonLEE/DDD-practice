@@ -1,5 +1,7 @@
 package sangyun.dddpractice.domian;
 
+import jakarta.persistence.Entity;
+
 public class OrderLine {
 	private String product;
 	private Money price;

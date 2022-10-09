@@ -4,6 +4,7 @@ import java.util.List;
 
 import sangyun.dddpractice.domian.supporter.OrderState;
 
+
 public class Order {
 	private OrderNumber id;
 	private List<OrderLine> orderLines;

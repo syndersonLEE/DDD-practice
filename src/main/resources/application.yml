@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost/shoppingdb?userSSL=false
+      username: sangyun
+      password: sangyun
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/shoppingdb?userSSL=false
+  jpa:
+    generate-ddl: true

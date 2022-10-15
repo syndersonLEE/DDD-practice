@@ -1,5 +1,8 @@
-package sangyun.dddpractice.domian;
+package sangyun.dddpractice.domian.supporter;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Money {
 	private int value;
 
@@ -7,9 +10,7 @@ public class Money {
 		this.value = value;
 	}
 
-	public int getValue() {
-		return this.value;
-	}
+	public Money() {};
 
 	public Money add(Money money) {
 		return new Money(this.value + money.value);

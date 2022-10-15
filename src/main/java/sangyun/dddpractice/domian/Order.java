@@ -2,13 +2,24 @@ package sangyun.dddpractice.domian;
 
 import java.util.List;
 
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import sangyun.dddpractice.domian.supporter.OrderState;
+import sangyun.dddpractice.domian.supporter.ShippingInfo;
 
-
+@Entity
 public class Order {
-	private OrderNumber id;
+	@Id
+	private Long id;
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name="order_id")
 	private List<OrderLine> orderLines;
 	private int totalAmounts;
+	@Embedded
 	private ShippingInfo shippingInfo;
 	private OrderState state;
 	private String orderNumber;
@@ -17,6 +28,8 @@ public class Order {
 		setOrderLines(orderLines);
 		setShippingInfo(shippingInfo);
 	}
+
+	public Order() {}
 
 	public void changeShippingInfo(ShippingInfo newShippingInfo) {
 		verifyNotYetShipped();
@@ -73,9 +86,5 @@ public class Order {
 		int result = 1;
 		result = prime * result + ((orderNumber == null) ? 0 : orderNumber.hashCode());
 		return result;
-	}
-
-	public OrderNumber getId() {
-		return id;
 	}
 }

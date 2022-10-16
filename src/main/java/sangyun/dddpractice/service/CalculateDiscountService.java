@@ -5,29 +5,36 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import sangyun.dddpractice.adapter.RuleDiscounter;
 import sangyun.dddpractice.domian.Customer;
 import sangyun.dddpractice.domian.supporter.Money;
 import sangyun.dddpractice.domian.OrderLine;
+import sangyun.dddpractice.exception.NoCustomerException;
 import sangyun.dddpractice.infrastructure.DroolsRuleEngine;
 import sangyun.dddpractice.repository.CustomerRepository;
 
 @Service
 public class CalculateDiscountService {
-	private DroolsRuleEngine droolsRuleEngine;
+	private RuleDiscounter ruleDiscounter;
 	private CustomerRepository customerRepository;
 
-	public CalculateDiscountService(DroolsRuleEngine droolsRuleEngine, CustomerRepository customerRepository) {
-		this.droolsRuleEngine = droolsRuleEngine;
+	public CalculateDiscountService(RuleDiscounter ruleDiscounter, CustomerRepository customerRepository) {
+		this.ruleDiscounter = ruleDiscounter;
 		this.customerRepository = customerRepository;
 	}
 
 	public Money calculateDiscount(List<OrderLine> orderLines, String customerId) {
-		Customer customer = customerRepository.getReferenceById(Long.parseLong(customerId));
+		Customer customer = customerRepository.findById(Long.parseLong(customerId)).orElseThrow();
+		return ruleDiscounter.applyRules(customer, orderLines);
 
-		Money money = new Money(0);
-		List<?> facts = Arrays.asList(customer, money);
-		// facts.addAll(orderLines);
-		droolsRuleEngine.evaluate("discountCalculation", facts);
-		return money;
 	}
+
+	private Customer findCustomer(String customerId) {
+		Customer customer = customerRepository
+			.findById(Long.parseLong(customerId))
+			.orElseThrow(
+				() -> new NoCustomerException()
+			);
+		return customer;
+	};
 }

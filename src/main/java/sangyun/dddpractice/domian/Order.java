@@ -15,6 +15,9 @@ import sangyun.dddpractice.domian.supporter.ShippingInfo;
 public class Order {
 	@Id
 	private Long id;
+
+	@Embedded
+	private Orderer orderer;
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name="order_id")
 	private List<OrderLine> orderLines;

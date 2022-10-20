@@ -75,11 +75,15 @@ public class Order {
 
 	@Override
 	public boolean equals(Object obj) {
-		if(this == obj) return true;
-		if(obj == null) return false;
-		if(obj.getClass() != Order.class) return false;
+		if(this == obj)
+			return true;
+		if(obj == null)
+			return false;
+		if(obj.getClass() != Order.class)
+			return false;
 		Order other = (Order)obj;
-		if (this.orderNumber == null) return false;
+		if (this.orderNumber == null)
+			return false;
 		return this.orderNumber.equals(other.orderNumber);
 	}
 
